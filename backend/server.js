@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const doctorRoutes = require("./routes/doctors");
 const patientRoutes = require("./routes/patients");
-const otherStaffRoutes = require("./routes/otherstaff");
+const otherStaffRoutes = require("./routes/otherStaff");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
