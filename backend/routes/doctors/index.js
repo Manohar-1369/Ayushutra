@@ -5,4 +5,5 @@ const { DoctorModel } = require("../../db/models/doctorModel");
 // Add doctor
 
 
+
 module.exports = router;
