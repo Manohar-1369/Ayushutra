@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { PatientModel } = require("../../db/models/patientModel");
+<<<<<<< HEAD
 
 
 // Add patient
@@ -97,4 +98,7 @@ const { PatientModel } = require("../../db/models/patientModel");
         }
     })
 
+=======
+// Add patient
+>>>>>>> appointmentSchema
 module.exports = router;
