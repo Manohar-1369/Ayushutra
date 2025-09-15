@@ -1,20 +1,31 @@
 const express = require("express");
 const router = express.Router();
 const { PatientModel } = require("../../db/models/patientModel");
-<<<<<<< HEAD
 
 
 // Add patient
     router.post("/register",async(req,res)=>{
-        
+        const {fullName,email,password}=req.body;
         try{
-            const  rebody = req.body;
-             const newUser=new PatientModel({
-                    rebody
-            })
-            if(!newUser){
-                return res.status(400).json({message:"User already exists"})
+            if(!fullName || !email || !password){
+                return res.status(400).json({message:"All fields are required"});
+
             }
+
+            const user=await PatientModel.findOne({
+                email,
+            });
+            if(user){
+                return res.status(400).json({message:"user already exist"});
+            }
+
+            const hashedPassword = await bcrypt.hash(password, 10);
+
+            const newUser=new PatientModel({
+                    fullName:fullName,
+                    email:email,
+                    password:hashedPassword,
+            })
 
             await newUser.save();
 
@@ -86,7 +97,4 @@ const { PatientModel } = require("../../db/models/patientModel");
         }
     })
 
-=======
-// Add patient
->>>>>>> appointmentSchema
 module.exports = router;
