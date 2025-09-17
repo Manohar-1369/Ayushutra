@@ -47,8 +47,8 @@ export default function HospitalMap() {
           {
             id: 1,
             name: "City Hospital",
-            lat: 17.4153,
-            lng: 78.4128,
+            lat: 19.076,
+            lng:  72.8777,
             address: "123 Main St",
             phone: "+91-12345-67890",
           },

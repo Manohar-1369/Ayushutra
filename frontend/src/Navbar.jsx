@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="navbar navbar-expand-lg border-bottom"
+      className="navbar navbar-expand-lg border-bottom sticky-top"
       style={{ backgroundColor: "#FFF" }}
     >
       <div className="container p-2">
@@ -44,7 +44,6 @@ export default function Navbar() {
               textShadow: "0px 2px 4px rgba(0,0,0,0.2)", // makes it readable always
               cursor: "pointer",
             }}
-            
           >
             Ayushutra
           </h2>
