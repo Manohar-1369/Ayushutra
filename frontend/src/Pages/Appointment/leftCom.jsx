@@ -30,7 +30,7 @@ export default function LeftHalf() {
 
 
   return (
-    <div className="continer col-8 mt-1 mb-2 p-2 ">
+    <div className="continer col-8 mt-2 mb-2 p-2 mx-auto">
       <div className="row">
         <div
           style={{
@@ -39,7 +39,7 @@ export default function LeftHalf() {
             flex: 1,
             overflowY: "auto",
             padding: "2rem",
-            borderRadius:"10px",
+            borderRadius: "10px",
           }}
         >
           <h3 className="mb-4 fw-bold text-success">Past Appointments</h3>
