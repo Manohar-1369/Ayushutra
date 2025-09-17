@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { DoctorModel } = require("../../db/models/doctorModel");
 
-
+// Add doctor
 router.post("/add", async (req, res) => {
   try {
     const doctor = new DoctorModel(req.body);
@@ -13,7 +13,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-
+// Get all doctors
 router.get("/all", async (req, res) => {
   try {
     const doctors = await DoctorModel.find();
@@ -23,7 +23,7 @@ router.get("/all", async (req, res) => {
   }
 });
 
-
+// Get doctor by ID
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -39,7 +39,25 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+//get doctor by specilization
+router.get("/", async (req, res) => {
+  
 
+  try {
+    const filter = {};
+
+    if (req.query.specialization) {
+      filter.specialization = req.query.specialization;
+    }
+
+    const doctors = await DoctorModel.find(filter);
+    res.json(doctors);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update doctor by ID
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -61,7 +79,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-
+// Delete doctor by ID
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
