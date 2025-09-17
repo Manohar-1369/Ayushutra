@@ -25,4 +25,5 @@ const StaffSchema = new mongoose.Schema({
   shift: { type: String, enum: ["Morning", "Evening", "Night"], default: "Morning" }
 }, { timestamps: true });
 
-const Staff = mongoose.model("Staff", StaffSchema);
+module.exports = { StaffSchema };
+
