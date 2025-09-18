@@ -2,16 +2,56 @@ const express = require("express");
 const router = express.Router();
 const { DoctorModel } = require("../../db/models/doctorModel");
 
+//function to generate weekly slots
+
+function getWeeklySlots(startHour, endHour) {
+  const slots = [];
+  const now = new Date();
+
+  for (let i = 0; i < 7; i++) {
+    const day = new Date();
+    day.setDate(now.getDate() + i);  
+
+    for (let hour = startHour; hour < endHour; hour++) {
+      const startTime = `${hour.toString().padStart(2, "0")}:00`;
+      const endTime = `${(hour + 1).toString().padStart(2, "0")}:00`;
+
+      slots.push({
+        date: new Date(day),   
+        startTime,
+        endTime,
+        isBooked: false,
+      });
+    }
+  }
+
+  return slots;
+}
+
+
 // Add doctor
 router.post("/add", async (req, res) => {
   try {
-    const doctor = new DoctorModel(req.body);
+    const { name, specialization, contact, email } = req.body;
+    
+    // Generate slots from 10 AM to 5 PM (7 days ahead)
+    const slots = getWeeklySlots(10, 17);
+
+    const doctor = new DoctorModel({
+      name,
+      specialization,
+      contact,
+      email,
+      slots,
+    });
+
     await doctor.save();
     res.status(201).json(doctor);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
+
 
 // Get all doctors
 router.get("/all", async (req, res) => {
@@ -41,8 +81,6 @@ router.get("/:id", async (req, res) => {
 
 //get doctor by specilization
 router.get("/", async (req, res) => {
-  
-
   try {
     const filter = {};
 
