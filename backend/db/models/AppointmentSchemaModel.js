@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { model } = require('mongoose');
 const { AppoinmentSchema } = require('../schemas/AppointmentSchema')
-const appointment = model(appointment,AppoinmentSchema)
+const appointment = model("appointment",AppoinmentSchema)
 module.export={Appointmentmodel:appointment}
