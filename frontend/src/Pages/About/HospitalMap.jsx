@@ -57,7 +57,7 @@ export default function HospitalMap() {
   }, []);
 
   return (
-    <div style={{ height: "50vh", width: "100%" }}>
+    <div style={{ height: "50vh", width: "100%" }} className="mb-5">
       <MapContainer
         center={[19.076, 72.8777]} // default (ignored once hospitals load)
         zoom={13}
