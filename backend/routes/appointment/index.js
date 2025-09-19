@@ -1,38 +1,72 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const doctorModel = require("../../db/models/doctorModel");
-const patientModel = require("../../db/models/patientModel");
-const appointmentModel = require("../../db/models/AppointmentSchemaModel")
 const router = express.Router();
 
-router.post("/add",async (req,res)=>{
-    const session = await mongoose.startSession()
-    session.startTransaction();
-try{
-    const { patientId, doctorId, slot, symptoms, notification_preference }= req.body;
+const getPatientDetailsMiddleware = require("../../middlewares/getPatientDetails");
+const { DoctorModel } = require("../../db/models/doctorModel");
+const { AppointmentModel } = require("../../db/models/AppointmentSchemaModel");
 
-    const doctor = await doctorModel.findById(doctorId);
-    if(!doctor) throw new Error("doctor not found");
+// POST /appointment/add
+router.post("/add", getPatientDetailsMiddleware, async (req, res) => {
+  const session = await mongoose.startSession();
+  session.startTransaction();
 
-    const patient = await patientModel.findById(patientId);
-    if(!patient) throw new Error("patient not found");
+  try {
+    const { doctorId, slot, symptoms, notification_preference } = req.body;
 
-    //logic to check availability
+    // Find doctor in the session
+    const doctor = await DoctorModel.findById(doctorId).session(session);
+    if (!doctor) throw new Error("Doctor not found");
 
-    const appointment = new appointmentModel({ patientId, doctorId, slot, symptoms, notification_preference });
-    appointment.save();
-    
- await session.commitTransaction();
- session.endSession();
+    // Check if the requested slot is available
+    const slotAvailable = doctor.slots.some(
+      (s) =>
+        s.date.getTime() === new Date(slot.date).getTime() &&
+        s.startTime === slot.startTime &&
+        !s.isBooked
+    );
 
- res.status(201).json({msg : "Appointment booked successfully",appointment});
-}catch(e){
-    await session.abortTransaction;
+    if (!slotAvailable) throw new Error("Requested slot is not available");
+
+    // Mark slot as booked
+    doctor.slots = doctor.slots.map((s) => {
+      if (
+        s.date.getTime() === new Date(slot.date).getTime() &&
+        s.startTime === slot.startTime
+      ) {
+        return { ...s.toObject(), isBooked: true };
+      }
+      return s;
+    });
+
+    await doctor.save({ session }); // Save doctor with updated slot in session
+
+    // Create the appointment in the same session
+    const appointment = new AppointmentModel({
+      patientId: req.patient._id,
+      doctorId,
+      slot,
+      symptoms,
+      notification_preference,
+    });
+
+    await appointment.save({ session });
+
+    // Commit transaction
+    await session.commitTransaction();
     session.endSession();
-    res.status(400).json({error : err.message});
 
-}
+    res.status(201).json({
+      msg: "Appointment booked successfully",
+      appointment,
+    });
+  } catch (err) {
+    // Abort transaction on error
+    await session.abortTransaction();
+    session.endSession();
 
-})
+    res.status(400).json({ error: err.message });
+  }
+});
 
 module.exports = router;
