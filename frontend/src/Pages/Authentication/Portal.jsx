@@ -1,8 +1,622 @@
-import React from 'react'
+// import React, { useState } from "react";
+
+// import { FaUserInjured, FaUserMd } from "react-icons/fa";
+
+// export default function Portal() {
+//   const [open, setOpen] = useState(false);
+//   const [role, setRole] = useState("");
+//   const [isSignup, setIsSignup] = useState(false); // Toggle for patient
+
+//   const openModal = (selectedRole) => {
+//     setRole(selectedRole);
+//     setIsSignup(false); // default to Sign In
+//     setOpen(true);
+//   };
+
+//   const closeModal = () => {
+//     setOpen(false);
+//     setRole("");
+//   };
+
+//   // Role-based colors
+//   const accent =
+//     role === "Doctor"
+//       ? "from-indigo-500 to-indigo-700 hover:from-indigo-600 hover:to-indigo-800 bg-indigo-600"
+//       : "from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 bg-teal-600";
+
+//   return (
+//     <>
+//       <div className="min-h-[80vh] flex items-center justify-center px-4 pt-5">
+//         <div className="w-full max-w-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl">
+//           {/* Title */}
+//           <div className="px-8 py-10 text-center">
+//             <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
+//               <span className="text-teal-600">Welcome to Ayushutra</span>
+//             </h2>
+//             <p className="mt-3 text-sm text-gray-900 dark:text-gray-600 max-w-md mx-auto">
+//               Your trusted holistic healthcare companion. Please choose your
+//               role to continue.
+//             </p>
+//           </div>
+
+//           {/* Role Cards */}
+//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-8 pb-10">
+//             <button
+//               type="button"
+//               onClick={() => openModal("Patient")}
+//               className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-teal-400 to-teal-600 hover:from-teal-500 hover:to-teal-700 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+//             >
+//               <FaUserInjured className="text-5xl mb-3" />
+//               <span className="font-semibold text-lg">Patient Portal</span>
+//               <p className="text-xs mt-2 text-teal-50">
+//                 Book treatments, view health records & more
+//               </p>
+//             </button>
+
+//             <button
+//               type="button"
+//               onClick={() => openModal("Doctor")}
+//               className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-400 to-indigo-600 hover:from-indigo-500 hover:to-indigo-700 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
+//             >
+//               <FaUserMd className="text-5xl mb-3" />
+//               <span className="font-semibold text-lg">Doctor Portal</span>
+//               <p className="text-xs mt-2 text-indigo-50">
+//                 Manage patients, schedules & insights
+//               </p>
+//             </button>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Modal */}
+//       {open && (
+//         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+//           <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md p-6 relative">
+//             {/* Close Button */}
+//             <button
+//               onClick={closeModal}
+//               className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+//             >
+//               ✕
+//             </button>
+
+//             {/* Title */}
+//             <h3 className="text-xl font-semibold text-center text-gray-900 dark:text-white">
+//               {role} {isSignup ? "Sign Up" : "Sign In"}
+//             </h3>
+//             <p className="text-sm text-center text-gray-500 dark:text-gray-400 mb-6">
+//               {role === "Doctor"
+//                 ? "Login to manage your patients and schedule"
+//                 : isSignup
+//                 ? "Create your account to start booking treatments"
+//                 : "Login to book treatments and view your records"}
+//             </p>
+
+//             {/* Form */}
+//             <form className="space-y-4">
+//               {isSignup && role === "Patient" && (
+//                 <div>
+//                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
+//                     Full Name
+//                   </label>
+//                   <input
+//                     type="text"
+//                     placeholder="Enter your full name"
+//                     className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+//                   />
+//                 </div>
+//               )}
+
+//               <div>
+//                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
+//                   {role === "Doctor" ? "Doctor ID / Email" : "Email"}
+//                 </label>
+//                 <input
+//                   type="email"
+//                   placeholder={
+//                     role === "Doctor"
+//                       ? "Enter your Doctor ID or Email"
+//                       : "Enter your Email"
+//                   }
+//                   className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+//                 />
+//               </div>
+
+//               <div>
+//                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
+//                   Password
+//                 </label>
+//                 <input
+//                   type="password"
+//                   placeholder="Enter your password"
+//                   className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+//                 />
+//               </div>
+
+//               {isSignup && role === "Patient" && (
+//                 <div>
+//                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
+//                     Confirm Password
+//                   </label>
+//                   <input
+//                     type="password"
+//                     placeholder="Re-enter your password"
+//                     className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+//                   />
+//                 </div>
+//               )}
+
+//               <button
+//                 type="submit"
+//                 className={`w-full text-white font-medium rounded-lg px-4 py-2 transition-all duration-200 bg-gradient-to-r ${accent}`}
+//               >
+//                 {role} {isSignup ? "Sign Up" : "Sign In"}
+//               </button>
+//             </form>
+
+//             {/* Toggle links */}
+//             {role === "Patient" && (
+//               <p className="text-xs text-center mt-4 text-gray-600 dark:text-gray-600">
+//                 {isSignup ? (
+//                   <>
+//                     Already have an account?{" "}
+//                     <button
+//                       onClick={() => setIsSignup(false)}
+//                       className="text-teal-600 hover:underline"
+//                     >
+//                       Sign in
+//                     </button>
+//                   </>
+//                 ) : (
+//                   <>
+//                     Don’t have an account?{" "}
+//                     <button
+//                       onClick={() => setIsSignup(true)}
+//                       className="text-teal-600 hover:underline"
+//                     >
+//                       Sign up
+//                     </button>
+//                   </>
+//                 )}
+//               </p>
+//             )}
+//           </div>
+//         </div>
+//       )}
+//     </>
+//   );
+// }
+
+
+
+
+
+import React, { useState } from "react";
+import { FaUserInjured, FaUserMd, FaLeaf, FaSpa } from "react-icons/fa";
 
 export default function Portal() {
+  const [open, setOpen] = useState(false);
+  const [role, setRole] = useState("");
+  const [isSignup, setIsSignup] = useState(false);
+
+  const openModal = (selectedRole) => {
+    setRole(selectedRole);
+    setIsSignup(false);
+    setOpen(true);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+    setRole("");
+  };
+
+  // Ayurvedic-inspired colors
+  const accent =
+    role === "Doctor"
+      ? "from-amber-600 to-amber-800 hover:from-amber-700 hover:to-amber-900 bg-amber-700"
+      : "from-emerald-600 to-emerald-800 hover:from-emerald-700 hover:to-emerald-900 bg-emerald-700";
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container py-24 lg:py-32">Portal</div>
-    </div>
-  );}
+    <>
+      <div className="min-h-[80vh] flex items-center justify-center px-4 pt-5 from-amber-50 to-white dark:from-gray-800 dark:to-gray-900">
+        <div className="w-full max-w-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-amber-200 dark:border-amber-800 rounded-3xl shadow-lg overflow-hidden relative">
+          {/* Decorative elements */}
+          <div className="absolute -top-10 -left-10 w-32 h-32 bg-amber-200 dark:bg-amber-800 rounded-full opacity-30"></div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-emerald-200 dark:bg-emerald-800 rounded-full opacity-30"></div>
+
+          {/* Title */}
+          <div className="px-8 py-10 text-center relative">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-900 mb-4">
+              <FaSpa className="text-4xl text-amber-600 dark:text-amber-300" />
+            </div>
+            <h2 className="text-4xl font-bold text-gray-800 dark:text-white font-serif">
+              Welcome to <span className="text-amber-600">Ayushutra</span>
+            </h2>
+            <p className="mt-3 text-amber-700 dark:text-amber-300 max-w-md mx-auto font-medium">
+              Your trusted holistic healthcare companion. Please choose your
+              role to continue.
+            </p>
+          </div>
+
+          {/* Role Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 pb-12">
+            <button
+              type="button"
+              onClick={() => openModal("Patient")}
+              className="relative flex flex-col items-center justify-center p-10 bg-gradient-to-br from-emerald-500 to-emerald-700 hover:from-emerald-600 hover:to-emerald-800 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group overflow-hidden"
+            >
+              <div className="absolute -top-4 -right-4 w-28 h-28 bg-white/10 rounded-full"></div>
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 rounded-full"></div>
+
+              <div className="mb-4 p-4 bg-white/20 rounded-full group-hover:scale-110 transition-transform duration-300">
+                <FaUserInjured className="text-4xl" />
+              </div>
+              <span className="font-semibold text-xl mb-2">Patient Portal</span>
+              <p className="text-sm text-emerald-100 text-center">
+                Book treatments, view health records & more
+              </p>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => openModal("Doctor")}
+              className="relative flex flex-col items-center justify-center p-10 bg-gradient-to-br from-amber-500 to-amber-700 hover:from-amber-600 hover:to-amber-800 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group overflow-hidden"
+            >
+              <div className="absolute -top-4 -right-4 w-28 h-28 bg-white/10 rounded-full"></div>
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 rounded-full"></div>
+
+              <div className="mb-4 p-4 bg-white/20 rounded-full group-hover:scale-110 transition-transform duration-300">
+                <FaUserMd className="text-4xl" />
+              </div>
+              <span className="font-semibold text-xl mb-2">Doctor Portal</span>
+              <p className="text-sm text-amber-100 text-center">
+                Manage patients, schedules & insights
+              </p>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {open && (
+        <div className="fixed inset-0 flex items-center justify-center bg-amber-900/70 z-50 backdrop-blur-sm transition-opacity duration-300">
+          <div className="bg-amber-50 dark:bg-amber-900/90 rounded-2xl shadow-2xl w-full max-w-md p-6 relative border-2 border-amber-200 dark:border-amber-700 transform transition-transform duration-300 scale-95 hover:scale-100 overflow-y-auto max-h-[90vh]">
+            {/* Close Button */}
+            <button
+              onClick={closeModal}
+              className="absolute top-4 right-4 text-amber-700 dark:text-amber-200 hover:text-amber-900 dark:hover:text-amber-50 transition-colors duration-200 p-1 rounded-full hover:bg-amber-200 dark:hover:bg-amber-700"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            {/* Ayurvedic decorative elements */}
+            <div className="absolute top-0 left-0 w-full flex justify-center">
+              <div className="w-24 h-1 bg-amber-600 dark:bg-amber-400 rounded-b-full"></div>
+            </div>
+
+            {/* Title */}
+            <div className="text-center mb-4">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-amber-100 dark:bg-amber-800/60 mb-2">
+                <FaLeaf className="h-6 w-6 text-amber-600 dark:text-amber-300" />
+              </div>
+              <h3 className="text-2xl font-semibold text-center text-amber-800 dark:text-amber-100 font-serif">
+                {role} {isSignup ? "Sign Up" : "Sign In"}
+              </h3>
+              <p className="text-sm text-center text-amber-600 dark:text-amber-300 mb-6 mt-2">
+                {role === "Doctor"
+                  ? "Access your healing practice and patient care portal"
+                  : isSignup
+                  ? "Begin your journey to holistic wellness with us"
+                  : "Continue your path to balanced health and wellness"}
+              </p>
+            </div>
+
+            {/* Form */}
+            <form className="space-y-4">
+              {isSignup && role === "Patient" && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                      Full Name *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-4 h-4 text-amber-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                          />
+                        </svg>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Enter your full name"
+                        required
+                        className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-amber-500 focus:border-amber-500 block w-full ps-10 p-2.5 dark:bg-amber-800/40 dark:border-amber-600 dark:placeholder-amber-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                        Age *
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Age"
+                        required
+                        min="1"
+                        max="120"
+                        className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5 dark:bg-amber-800/40 dark:border-amber-600 dark:placeholder-amber-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                        Gender *
+                      </label>
+                      <div className="relative">
+                        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none z-10">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-4 h-4 text-amber-500"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                            />
+                          </svg>
+                        </div>
+                        <select
+                          required
+                          className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 block w-full ps-10 p-2.5 pr-10 appearance-none dark:bg-amber-800/40 dark:border-amber-600 dark:text-amber-100 dark:focus:ring-amber-500 dark:focus:border-amber-500 transition-colors duration-200 cursor-pointer hover:border-amber-400 dark:hover:border-amber-500"
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23d97706' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                            backgroundPosition: "right 0.5rem center",
+                            backgroundRepeat: "no-repeat",
+                            backgroundSize: "1.5em 1.5em",
+                          }}
+                        >
+                          <option
+                            value=""
+                            disabled
+                            selected
+                            className="text-amber-500/70 dark:text-amber-400/70"
+                          >
+                            Select Gender
+                          </option>
+                          <option
+                            value="male"
+                            className="text-amber-900 dark:text-amber-100"
+                          >
+                            Male
+                          </option>
+                          <option
+                            value="female"
+                            className="text-amber-900 dark:text-amber-100"
+                          >
+                            Female
+                          </option>
+                          <option
+                            value="other"
+                            className="text-amber-900 dark:text-amber-100"
+                          >
+                            Other
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                      Contact Number *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-4 h-4 text-amber-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                          />
+                        </svg>
+                      </div>
+                      <input
+                        type="tel"
+                        placeholder="Enter your contact number"
+                        required
+                        className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-amber-500 focus:border-amber-500 block w-full ps-10 p-2.5 dark:bg-amber-800/40 dark:border-amber-600 dark:placeholder-amber-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                      Address *
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-4 h-4 text-amber-500"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                      </div>
+                      <input
+                        type="text"
+                        placeholder="Enter your complete address"
+                        required
+                        className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-amber-500 focus:border-amber-500 block w-full ps-10 p-2.5 dark:bg-amber-800/40 dark:border-amber-600 dark:placeholder-amber-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                  {role === "Doctor" ? "Doctor ID / Email" : "Email"} *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg
+                      className="w-4 h-4 text-amber-500"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 16"
+                    >
+                      <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
+                      <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
+                    </svg>
+                  </div>
+                  <input
+                    type="email"
+                    placeholder={
+                      role === "Doctor"
+                        ? "Enter your Doctor ID or Email"
+                        : "Enter your Email"
+                    }
+                    required
+                    className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-amber-500 focus:border-amber-500 block w-full ps-10 p-2.5 dark:bg-amber-800/40 dark:border-amber-600 dark:placeholder-amber-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                  Password *
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-4 h-4 text-amber-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                      />
+                    </svg>
+                  </div>
+                  <input
+                    type="password"
+                    placeholder="Enter your password"
+                    required
+                    className="bg-amber-50 border border-amber-300 text-amber-900 text-sm rounded-xl focus:ring-amber-500 focus:border-amber-500 block w-full ps-10 p-2.5 dark:bg-amber-800/40 dark:border-amber-600 dark:placeholder-amber-400 dark:text-white dark:focus:ring-amber-500 dark:focus:border-amber-500"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className={`w-full text-white font-medium rounded-xl px-4 py-3 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 ${accent}`}
+              >
+                <span className="flex items-center justify-center">
+                  {role} {isSignup ? "Sign Up" : "Sign In"}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 ml-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </form>
+
+            {/* Toggle links */}
+            {role === "Patient" && (
+              <p className="text-sm text-center mt-6 text-amber-700 dark:text-amber-300">
+                {isSignup ? (
+                  <>
+                    Already have an account?{" "}
+                    <button
+                      type="button"
+                      onClick={() => setIsSignup(false)}
+                      className="font-semibold text-amber-800 dark:text-amber-200 hover:underline"
+                    >
+                      Sign in
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    Don't have an account?{" "}
+                    <button
+                      type="button"
+                      onClick={() => setIsSignup(true)}
+                      className="font-semibold text-amber-800 dark:text-amber-200 hover:underline"
+                    >
+                      Sign up
+                    </button>
+                  </>
+                )}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

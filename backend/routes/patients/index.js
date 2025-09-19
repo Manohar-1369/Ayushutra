@@ -25,6 +25,7 @@ const { PatientModel } = require("../../db/models/patientModel");
                     fullName:fullName,
                     email:email,
                     password:hashedPassword,
+                    
             })
 
             await newUser.save();
