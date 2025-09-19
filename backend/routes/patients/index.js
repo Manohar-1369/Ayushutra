@@ -3,9 +3,6 @@ const router = express.Router();
 const bcrypt = require("bcrypt"); // ⬅️ You must require bcrypt for hashing
 const { PatientModel } = require("../../db/models/patientModel");
 
-// ------------------------------------
-// ➡️ Updated /register Route (POST) ⬅️
-// ------------------------------------
 router.post("/register", async (req, res) => {
     // Destructure all fields from the request body
     const {
@@ -75,9 +72,6 @@ router.post("/register", async (req, res) => {
     }
 });
 
-// ------------------------------------
-// /login Route (POST) - No changes needed
-// ------------------------------------
 router.post("/login", async (req, res) => {
     try {
         const {
@@ -120,9 +114,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-// ------------------------------------
-// /getAllPatients Route (GET)
-// ------------------------------------
+
 router.get("/getAllPatients", async (req, res) => {
     try {
         const patients = await PatientModel.find().select('-password'); // Exclude passwords
@@ -135,9 +127,6 @@ router.get("/getAllPatients", async (req, res) => {
     }
 });
 
-// ------------------------------------
-// /getPatient/:id Route (GET)
-// ------------------------------------
 router.get("/getPatient/:id", async (req, res) => {
     try {
         const patient = await PatientModel.findById(req.params.id).select('-password'); // Exclude password
@@ -160,9 +149,6 @@ router.get("/getPatient/:id", async (req, res) => {
     }
 });
 
-// ------------------------------------
-// /updatePatient/:id Route (PUT) - Handles optional updates, but password hashing should be handled separately
-// ------------------------------------
 router.put("/updatePatient/:id", async (req, res) => {
     try {
         const updateData = req.body;
@@ -197,9 +183,7 @@ router.put("/updatePatient/:id", async (req, res) => {
     }
 })
 
-// ------------------------------------
-// /deletePatient/:id Route (DELETE)
-// ------------------------------------
+
 router.delete("/deletePatient/:id", async (req, res) => {
     try {
         const deletedPatient = await PatientModel.findByIdAndDelete(req.params.id);
