@@ -129,6 +129,8 @@ export default function Portal() {
           setTimeout(() => {
             closeModal();
           }, 1000);
+
+          navigate("/patient_dashboard")
         } else {
           setTimeout(closeModal, 1500);
         }
