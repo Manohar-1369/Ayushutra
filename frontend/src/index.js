@@ -25,7 +25,7 @@ root.render(
       <Route path="/team" element={<OurTeamPage/>}/>
       <Route path="/bookAppointment" element={<Book/>}/>
       <Route path="/portal" element={<Portal/>}/>
-      <Route path="/patientPortel" element={<PatientDashboard/>}/>
+      {/* <Route path="/patientPortel" element={<PatientDashboard/>}/> */}
     </Routes>
     <Footer1 />
   </BrowserRouter>

@@ -1,6 +1,13 @@
 
 import React, { useState } from "react";
-import { FaUserInjured, FaUserMd, FaLeaf, FaSpa } from "react-icons/fa";
+import {
+  FaUserInjured,
+  FaUserMd,
+  FaLeaf,
+  FaSpa,
+  FaUserPlus,
+  FaSignInAlt,
+} from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function Portal() {
@@ -8,6 +15,8 @@ export default function Portal() {
   const [role, setRole] = useState("");
   const [isSignup, setIsSignup] = useState(false);
   const navigate=useNavigate();
+
+  const API_BASE_URL="http://localhost:5555/patients"
 
   // --- State for Form Inputs ---
   const [formData, setFormData] = useState({
@@ -115,8 +124,14 @@ export default function Portal() {
       if (response.ok) {
         setSuccessMessage(data.message || `${role} action successful!`);
         console.log("Backend Response:", data);
-        // Simulate successful action and close modal
-        setTimeout(closeModal, 1500);
+        // Navigate to patient dashboard after successful sign in
+        if (role === "Patient" && !isSignup) {
+          setTimeout(() => {
+            closeModal();
+          }, 1000);
+        } else {
+          setTimeout(closeModal, 1500);
+        }
       } else {
         // Handle backend validation errors (400, 404, etc.)
         setErrorMessage(
@@ -585,7 +600,6 @@ export default function Portal() {
                       type="button"
                       onClick={() => {
                         setIsSignup(false);
-                        navigate("/patientPortel");
                       }}
                       className="font-semibold text-amber-800 dark:text-amber-200 hover:underline"
                     >
