@@ -1,210 +1,13 @@
-// import React, { useState } from "react";
-
-// import { FaUserInjured, FaUserMd } from "react-icons/fa";
-
-// export default function Portal() {
-//   const [open, setOpen] = useState(false);
-//   const [role, setRole] = useState("");
-//   const [isSignup, setIsSignup] = useState(false); // Toggle for patient
-
-//   const openModal = (selectedRole) => {
-//     setRole(selectedRole);
-//     setIsSignup(false); // default to Sign In
-//     setOpen(true);
-//   };
-
-//   const closeModal = () => {
-//     setOpen(false);
-//     setRole("");
-//   };
-
-//   // Role-based colors
-//   const accent =
-//     role === "Doctor"
-//       ? "from-indigo-500 to-indigo-700 hover:from-indigo-600 hover:to-indigo-800 bg-indigo-600"
-//       : "from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800 bg-teal-600";
-
-//   return (
-//     <>
-//       <div className="min-h-[80vh] flex items-center justify-center px-4 pt-5">
-//         <div className="w-full max-w-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl">
-//           {/* Title */}
-//           <div className="px-8 py-10 text-center">
-//             <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
-//               <span className="text-teal-600">Welcome to Ayushutra</span>
-//             </h2>
-//             <p className="mt-3 text-sm text-gray-900 dark:text-gray-600 max-w-md mx-auto">
-//               Your trusted holistic healthcare companion. Please choose your
-//               role to continue.
-//             </p>
-//           </div>
-
-//           {/* Role Cards */}
-//           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-8 pb-10">
-//             <button
-//               type="button"
-//               onClick={() => openModal("Patient")}
-//               className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-teal-400 to-teal-600 hover:from-teal-500 hover:to-teal-700 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
-//             >
-//               <FaUserInjured className="text-5xl mb-3" />
-//               <span className="font-semibold text-lg">Patient Portal</span>
-//               <p className="text-xs mt-2 text-teal-50">
-//                 Book treatments, view health records & more
-//               </p>
-//             </button>
-
-//             <button
-//               type="button"
-//               onClick={() => openModal("Doctor")}
-//               className="flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-400 to-indigo-600 hover:from-indigo-500 hover:to-indigo-700 text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-200"
-//             >
-//               <FaUserMd className="text-5xl mb-3" />
-//               <span className="font-semibold text-lg">Doctor Portal</span>
-//               <p className="text-xs mt-2 text-indigo-50">
-//                 Manage patients, schedules & insights
-//               </p>
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Modal */}
-//       {open && (
-//         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-//           <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl w-full max-w-md p-6 relative">
-//             {/* Close Button */}
-//             <button
-//               onClick={closeModal}
-//               className="absolute top-3 right-3 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-//             >
-//               ✕
-//             </button>
-
-//             {/* Title */}
-//             <h3 className="text-xl font-semibold text-center text-gray-900 dark:text-white">
-//               {role} {isSignup ? "Sign Up" : "Sign In"}
-//             </h3>
-//             <p className="text-sm text-center text-gray-500 dark:text-gray-400 mb-6">
-//               {role === "Doctor"
-//                 ? "Login to manage your patients and schedule"
-//                 : isSignup
-//                 ? "Create your account to start booking treatments"
-//                 : "Login to book treatments and view your records"}
-//             </p>
-
-//             {/* Form */}
-//             <form className="space-y-4">
-//               {isSignup && role === "Patient" && (
-//                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
-//                     Full Name
-//                   </label>
-//                   <input
-//                     type="text"
-//                     placeholder="Enter your full name"
-//                     className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-//                   />
-//                 </div>
-//               )}
-
-//               <div>
-//                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
-//                   {role === "Doctor" ? "Doctor ID / Email" : "Email"}
-//                 </label>
-//                 <input
-//                   type="email"
-//                   placeholder={
-//                     role === "Doctor"
-//                       ? "Enter your Doctor ID or Email"
-//                       : "Enter your Email"
-//                   }
-//                   className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-//                 />
-//               </div>
-
-//               <div>
-//                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
-//                   Password
-//                 </label>
-//                 <input
-//                   type="password"
-//                   placeholder="Enter your password"
-//                   className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-//                 />
-//               </div>
-
-//               {isSignup && role === "Patient" && (
-//                 <div>
-//                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-700">
-//                     Confirm Password
-//                   </label>
-//                   <input
-//                     type="password"
-//                     placeholder="Re-enter your password"
-//                     className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-offset-1 focus:ring-teal-500 focus:outline-none dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-//                   />
-//                 </div>
-//               )}
-
-//               <button
-//                 type="submit"
-//                 className={`w-full text-white font-medium rounded-lg px-4 py-2 transition-all duration-200 bg-gradient-to-r ${accent}`}
-//               >
-//                 {role} {isSignup ? "Sign Up" : "Sign In"}
-//               </button>
-//             </form>
-
-//             {/* Toggle links */}
-//             {role === "Patient" && (
-//               <p className="text-xs text-center mt-4 text-gray-600 dark:text-gray-600">
-//                 {isSignup ? (
-//                   <>
-//                     Already have an account?{" "}
-//                     <button
-//                       onClick={() => setIsSignup(false)}
-//                       className="text-teal-600 hover:underline"
-//                     >
-//                       Sign in
-//                     </button>
-//                   </>
-//                 ) : (
-//                   <>
-//                     Don’t have an account?{" "}
-//                     <button
-//                       onClick={() => setIsSignup(true)}
-//                       className="text-teal-600 hover:underline"
-//                     >
-//                       Sign up
-//                     </button>
-//                   </>
-//                 )}
-//               </p>
-//             )}
-//           </div>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
-
 
 import React, { useState } from "react";
-import {
-  FaUserInjured,
-  FaUserMd,
-  FaLeaf,
-  FaSpa,
-  FaSignInAlt,
-  FaUserPlus,
-} from "react-icons/fa";
-
-// ⚠️ UPDATED: Set your backend URL here to http://localhost:5555/patients
-const API_BASE_URL = "http://localhost:5555/patients"; 
+import { FaUserInjured, FaUserMd, FaLeaf, FaSpa } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function Portal() {
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState("");
   const [isSignup, setIsSignup] = useState(false);
+  const navigate=useNavigate();
 
   // --- State for Form Inputs ---
   const [formData, setFormData] = useState({
@@ -780,7 +583,10 @@ export default function Portal() {
                     Already have an account?{" "}
                     <button
                       type="button"
-                      onClick={toggleSignup}
+                      onClick={() => {
+                        setIsSignup(false);
+                        navigate("/patientPortel");
+                      }}
                       className="font-semibold text-amber-800 dark:text-amber-200 hover:underline"
                     >
                       Sign in

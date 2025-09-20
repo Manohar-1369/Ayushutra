@@ -12,6 +12,7 @@ import Footer1 from "./footer1";
 import "./App.css"
 import "./index.css"
 import Portal from "./Pages/Authentication/Portal";
+import PatientDashboard from "./Pages/PatientPage/patientDashboard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +25,7 @@ root.render(
       <Route path="/team" element={<OurTeamPage/>}/>
       <Route path="/bookAppointment" element={<Book/>}/>
       <Route path="/portal" element={<Portal/>}/>
+      <Route path="/patientPortel" element={<PatientDashboard/>}/>
     </Routes>
     <Footer1 />
   </BrowserRouter>
