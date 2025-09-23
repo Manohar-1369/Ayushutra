@@ -172,7 +172,7 @@ export default function Portal() {
               <FaSpa className="text-4xl text-amber-600 dark:text-amber-300" />
             </div>
             <h2 className="text-4xl font-bold text-gray-800 dark:text-white font-serif">
-              Welcome to <span className="text-amber-600">Ayushutra</span>
+              Welcome to <span className="text-amber-600">AyurSutra</span>
             </h2>
             <p className="mt-3 text-amber-700 dark:text-amber-300 max-w-md mx-auto font-medium">
               Your trusted holistic healthcare companion. Please choose your role
