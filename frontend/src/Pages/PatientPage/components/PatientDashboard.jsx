@@ -788,7 +788,7 @@ const PatientDashboard = () => {
               style={{ width: "auto", height: "50px", borderRadius: "50%" }}
             />
             <div>
-              <h1 className="font-bold text-emerald-800 text-lg">Ayushutra</h1>
+              <h1 className="font-bold text-emerald-800 text-lg">AyurSutra</h1>
               <p className="font-bold text-emerald-800 text-sm">Wellness</p>
             </div>
           </div>

@@ -43,7 +43,7 @@ export default function Navbar1() {
               }}
               className="hover:tracking-wider hover:scale-105 transition-transform duration-300"
             >
-              AYUSHUTRA
+              AYURSUTRA
             </h1>
             <p className="text-xs text-wellness-green font-medium">
               Wellness Management
